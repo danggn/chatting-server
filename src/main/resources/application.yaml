@@ -1,1 +1,24 @@
+server:
+  port: 8060
+spring:
+  application:
+    name: chatting-server
+  redis:
+    host: 127.0.0.1
+    port: 6379
+#    timeout: 5000
+#  profiles:
+#    active: local
 
+keycloak:
+  auth-server-url: http://13.209.121.101:8080/auth
+  realm: danggn-market
+  resource: chatting-server
+  public-client: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
