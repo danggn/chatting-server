@@ -9,7 +9,6 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import java.nio.charset.StandardCharsets;
 
 @Configuration
 public class RedisConfig {
@@ -22,11 +21,11 @@ public class RedisConfig {
     }
 
     @Bean
-    RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+    RedisTemplate<String, ChatMessage> redisTemplate(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<String, ChatMessage> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(connectionFactory);
-        redisTemplate.setKeySerializer(new StringRedisSerializer((StandardCharsets.UTF_8)));
-        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(ChatMessage.class));
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(String.class));
         redisTemplate.setEnableTransactionSupport(true);
         return redisTemplate;
     }
