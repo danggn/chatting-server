@@ -6,7 +6,6 @@ import redis.embedded.RedisServer;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.io.IOException;
 
 @Configuration
 public class EmbeddedRedisConfig {
@@ -16,13 +15,15 @@ public class EmbeddedRedisConfig {
     private RedisServer redisServer;
 
     @PostConstruct
-    public void startRedis() throws IOException {
+    public void startRedis() {
         redisServer = new RedisServer(redisPort);
         redisServer.start(); //Redis 시작
     }
 
     @PreDestroy
     public void stopRedis() {
-        redisServer.stop(); //Redis 종료
+        if (redisServer != null) {
+            redisServer.stop(); //Redis 종료
+        }
     }
 }
