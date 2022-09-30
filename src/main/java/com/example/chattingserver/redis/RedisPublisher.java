@@ -1,4 +1,4 @@
-package com.example.chattingserver.service;
+package com.example.chattingserver.redis;
 
 import com.example.chattingserver.dto.ChatMessage;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RedisPublisher {
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, ChatMessage> redisTemplate;
 
     public void publish(ChannelTopic channelTopic, ChatMessage message) {
         redisTemplate.convertAndSend(channelTopic.getTopic(), message);
