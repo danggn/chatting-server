@@ -33,10 +33,10 @@ dependencies {
 
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
-    implementation 'org.keycloak.bom:keycloak-adapter-bom:19.0.2'
-    implementation 'org.keycloak:keycloak-spring-boot-starter:19.0.2'
+    implementation 'org.keycloak:keycloak-spring-boot-starter:10.0.2'
+    implementation 'org.keycloak.bom:keycloak-adapter-bom:10.0.2'
 
-    implementation 'it.ozimov:embedded-redis:0.7.3'
+    implementation ('it.ozimov:embedded-redis:0.7.3') { exclude group: "org.slf4j", module: "slf4j-simple" }
 
 
     runtimeOnly 'com.h2database:h2'
